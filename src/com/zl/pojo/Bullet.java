@@ -49,6 +49,7 @@ public class Bullet {
         rect.y = this.y;
         rect.width = width;
         rect.height = heigth;
+        tf.bulletList.add(this);
     }
 
     public Dir getDir() {

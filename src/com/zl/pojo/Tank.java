@@ -1,5 +1,6 @@
 package com.zl.pojo;
 
+import com.zl.Audio;
 import com.zl.ResourceImage;
 import com.zl.TankFrame;
 import com.zl.enums.Dir;
@@ -39,7 +40,7 @@ public class Tank {
 
     Rectangle rect = new Rectangle();
 
-    private TankFrame tankFrame;
+    public TankFrame tankFrame;
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
@@ -183,7 +184,11 @@ public class Tank {
     public void fire() {
         int bx = this.x - Bullet.width / 2 + Tank.width / 2;
         int by = this.y - Bullet.heigth / 2 + Tank.heigth / 2;
-        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.getGroup(), this.tankFrame));
+        new Bullet(bx, by, this.dir, this.getGroup(), this.tankFrame);
+        if (this.getGroup() == Group.GOOD)
+            new Thread(()->{
+                new Audio("com/zl/audio/tank_fire.wav").play();
+            }).start();
     }
 
     public void die() {
