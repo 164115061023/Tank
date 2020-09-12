@@ -3,11 +3,7 @@ package com.zl;
 import com.zl.config.PropertiesManager;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
-import com.zl.pojo.Tank;
-
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import com.zl.pojo.DefaultTank;
 
 /**
  * @Description
@@ -37,13 +33,13 @@ public class T {
 
         int tankCount = 0;
         if (propertiesManager.getConfig("initTankCount")!=null){
-            tankCount = Integer.parseInt((String) propertiesManager.getConfig("initTankCount")) ;
+            tankCount = propertiesManager.getIntConfig("initTankCount");
         }
 
 
         TankFrame tankFrame = new TankFrame();
         for (int i = 0; i < tankCount; i++) {
-            tankFrame.tankList.add(new Tank(i*60, 200, Dir.DOWN, Group.BAD, tankFrame));
+            tankFrame.tankList.add(new DefaultTank(i*60, 200, Dir.DOWN, Group.BAD, tankFrame));
         }
 
         new Thread(()->new Audio("com/zl/audio/war1.wav").loop()).start();

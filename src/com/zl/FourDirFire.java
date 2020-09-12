@@ -2,8 +2,8 @@ package com.zl;
 
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
-import com.zl.pojo.Bullet;
-import com.zl.pojo.Tank;
+import com.zl.pojo.DefaultBullet;
+import com.zl.pojo.DefaultTank;
 
 /**
  * @Description
@@ -17,12 +17,12 @@ public class FourDirFire implements FireStrategy{
     private FourDirFire(){}
 
     @Override
-    public void fire(Tank t) {
-        int bx = t.getX() - Bullet.width / 2 + Tank.width / 2;
-        int by = t.getY() - Bullet.heigth / 2 + Tank.heigth / 2;
+    public void fire(DefaultTank t) {
+        int bx = t.getX() - DefaultBullet.width / 2 + DefaultTank.width / 2;
+        int by = t.getY() - DefaultBullet.heigth / 2 + DefaultTank.heigth / 2;
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bx, by, dir, t.getGroup(), t.tankFrame);
+            new DefaultBullet(bx, by, dir, t.getGroup(), t.tankFrame);
         }
         if (t.getGroup() == Group.GOOD)
             new Thread(()->{

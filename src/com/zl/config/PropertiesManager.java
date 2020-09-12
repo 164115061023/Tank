@@ -26,7 +26,7 @@ public class PropertiesManager {
     }
 
     public int getIntConfig(String key) {
-        return (int) properties.get(key);
+        return Integer.parseInt((String) properties.get(key));
     }
 
     public String getStringConfig(String key) {

@@ -15,7 +15,7 @@ import java.util.Random;
  * @Date 2020/8/15 10:10
  * @Version 1.0
  */
-public class Tank {
+public class DefaultTank {
 
     //坦克位置
     private int x , y;
@@ -41,7 +41,7 @@ public class Tank {
 
     public TankFrame tankFrame;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public DefaultTank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -171,8 +171,8 @@ public class Tank {
     private void boundsCheck() {
         if (this.x < 2) x = 2;
         if (this.y < 30) y = 30;
-        if ((this.x > TankFrame.GAME_WIDTH - Tank.width)) x = TankFrame.GAME_WIDTH - Tank.width;
-        if ((this.y > TankFrame.GAME_HEIGHT - Tank.heigth)) y = TankFrame.GAME_HEIGHT - Tank.heigth;
+        if ((this.x > TankFrame.GAME_WIDTH - DefaultTank.width)) x = TankFrame.GAME_WIDTH - DefaultTank.width;
+        if ((this.y > TankFrame.GAME_HEIGHT - DefaultTank.heigth)) y = TankFrame.GAME_HEIGHT - DefaultTank.heigth;
     }
 
     private void randomDir(){

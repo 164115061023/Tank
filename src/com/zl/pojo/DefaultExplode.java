@@ -1,5 +1,8 @@
-package com.zl;
+package com.zl.pojo;
 
+import com.zl.Audio;
+import com.zl.ResourceImage;
+import com.zl.TankFrame;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
 
@@ -12,7 +15,7 @@ import java.util.Random;
  * @Date 2020/8/30 21:41
  * @Version 1.0
  */
-public class Explode {
+public class DefaultExplode {
     //位置
     private int x , y;
 
@@ -26,7 +29,7 @@ public class Explode {
 
     int step = 0;
 
-    public Explode(int x, int y, TankFrame tankFrame) {
+    public DefaultExplode(int x, int y, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.tankFrame = tankFrame;

@@ -1,8 +1,5 @@
 package com.zl.pojo;
 
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-import com.zl.Audio;
-import com.zl.Explode;
 import com.zl.ResourceImage;
 import com.zl.TankFrame;
 import com.zl.enums.Dir;
@@ -17,7 +14,7 @@ import java.awt.image.BufferedImage;
  * @Date 2020/8/15 11:13
  * @Version 1.0
  */
-public class Bullet {
+public class DefaultBullet {
 
     //位置
     private int x, y;
@@ -39,7 +36,7 @@ public class Bullet {
 
     TankFrame tf = null;
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public DefaultBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -113,12 +110,12 @@ public class Bullet {
         if (x<0 || y<0 || x> TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank tank) {
+    public void collideWith(DefaultTank tank) {
         if (this.group == tank.getGroup()) return;
         if (rect.intersects(tank.rect)) {
             tank.die();
             this.die();
-            tf.explodeList.add(new Explode(tank.getX()+Tank.width/2-Explode.width/2, tank.getY()+Tank.heigth/2-Explode.heigth/2, tf));
+            tf.explodeList.add(new DefaultExplode(tank.getX()+ DefaultTank.width/2- DefaultExplode.width/2, tank.getY()+ DefaultTank.heigth/2- DefaultExplode.heigth/2, tf));
         }
     }
 

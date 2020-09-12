@@ -2,8 +2,9 @@ package com.zl;
 
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
-import com.zl.pojo.Bullet;
-import com.zl.pojo.Tank;
+import com.zl.pojo.DefaultBullet;
+import com.zl.pojo.DefaultExplode;
+import com.zl.pojo.DefaultTank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -24,11 +25,11 @@ public class TankFrame extends Frame {
     //游戏页面长度和高度
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
-    Tank myTank = new Tank(200,400, Dir.DOWN, Group.GOOD, this);
+    DefaultTank myTank = new DefaultTank(200,400, Dir.DOWN, Group.GOOD, this);
 
-    public List<Bullet> bulletList = new ArrayList<>();
-    public List<Tank> tankList = new ArrayList<>();
-    public List<Explode> explodeList = new ArrayList<>();
+    public List<DefaultBullet> bulletList = new ArrayList<>();
+    public List<DefaultTank> tankList = new ArrayList<>();
+    public List<DefaultExplode> explodeList = new ArrayList<>();
     //public Explode explode = new Explode(100,100,this);
 
     public TankFrame(){
