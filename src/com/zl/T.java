@@ -4,6 +4,7 @@ import com.zl.config.PropertiesManager;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
 import com.zl.pojo.DefaultTank;
+import com.zl.utils.Audio;
 
 /**
  * @Description
@@ -39,7 +40,7 @@ public class T {
 
         TankFrame tankFrame = new TankFrame();
         for (int i = 0; i < tankCount; i++) {
-            tankFrame.tankList.add(new DefaultTank(i*60, 200, Dir.DOWN, Group.BAD, tankFrame));
+            tankFrame.tankList.add(tankFrame.baseTankGroup.creatTank(i*60, 200, Dir.DOWN, Group.BAD, tankFrame));
         }
 
         new Thread(()->new Audio("com/zl/audio/war1.wav").loop()).start();

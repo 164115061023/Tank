@@ -4,6 +4,8 @@ import com.zl.ResourceImage;
 import com.zl.TankFrame;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
+import com.zl.pojo.abstractTankGroup.BaseBullet;
+import com.zl.pojo.abstractTankGroup.BaseTank;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,27 +16,13 @@ import java.awt.image.BufferedImage;
  * @Date 2020/8/15 11:13
  * @Version 1.0
  */
-public class DefaultBullet {
-
-    //位置
-    private int x, y;
-    //方向
-    private Dir dir;
+public class DefaultBullet extends BaseBullet {
 
     //子弹宽高
     public static int width = ResourceImage.bulletD.getWidth();
     public static int heigth = ResourceImage.bulletD.getHeight();
 
-    Rectangle rect = new Rectangle();
-
     private final static int speed = 6;
-
-    //子弹是否活着
-    private boolean living = true;
-
-    private Group group = null;
-
-    TankFrame tf = null;
 
     public DefaultBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
@@ -49,14 +37,6 @@ public class DefaultBullet {
         tf.bulletList.add(this);
     }
 
-    public Dir getDir() {
-        return dir;
-    }
-
-    public void setDir(Dir dir) {
-        this.dir = dir;
-    }
-
 
     public void paint(Graphics g) {
 
@@ -64,11 +44,6 @@ public class DefaultBullet {
             tf.bulletList.remove(this);
         }
 
-//        Color color = g.getColor();
-//        g.setColor(Color.RED);
-//        g.fillOval(x,y,10,10);
-//        g.setColor(color);
-        move();
         BufferedImage image = null;
         switch (dir) {
             case UP:
@@ -85,10 +60,11 @@ public class DefaultBullet {
                 break;
         }
         g.drawImage(image,x,y,null);
+        move();
 
     }
 
-    private void move() {
+    public void move() {
         switch (dir){
             case UP:
                 y-=speed;
@@ -110,16 +86,13 @@ public class DefaultBullet {
         if (x<0 || y<0 || x> TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(DefaultTank tank) {
+    public void collideWith(BaseTank tank) {
         if (this.group == tank.getGroup()) return;
         if (rect.intersects(tank.rect)) {
             tank.die();
             this.die();
-            tf.explodeList.add(new DefaultExplode(tank.getX()+ DefaultTank.width/2- DefaultExplode.width/2, tank.getY()+ DefaultTank.heigth/2- DefaultExplode.heigth/2, tf));
+            tf.explodeList.add(tf.baseTankGroup.creatExplode(tank.getX()+ DefaultTank.width/2- DefaultExplode.width/2, tank.getY()+ DefaultTank.heigth/2- DefaultExplode.heigth/2, tf));
         }
     }
 
-    private void die() {
-        this.living = false;
-    }
 }

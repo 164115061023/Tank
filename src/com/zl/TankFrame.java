@@ -2,9 +2,13 @@ package com.zl;
 
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
-import com.zl.pojo.DefaultBullet;
-import com.zl.pojo.DefaultExplode;
-import com.zl.pojo.DefaultTank;
+
+import com.zl.pojo.abstractTankGroup.BaseBullet;
+import com.zl.pojo.abstractTankGroup.BaseExplode;
+import com.zl.pojo.abstractTankGroup.BaseTank;
+import com.zl.tankGroupFactory.AdvanceTankGroup;
+import com.zl.tankGroupFactory.BaseTankGroup;
+import com.zl.tankGroupFactory.DefaultTankGroup;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -22,15 +26,16 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
+    public BaseTankGroup baseTankGroup = new DefaultTankGroup();
     //游戏页面长度和高度
-    public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
 
-    DefaultTank myTank = new DefaultTank(200,400, Dir.DOWN, Group.GOOD, this);
 
-    public List<DefaultBullet> bulletList = new ArrayList<>();
-    public List<DefaultTank> tankList = new ArrayList<>();
-    public List<DefaultExplode> explodeList = new ArrayList<>();
-    //public Explode explode = new Explode(100,100,this);
+    public List<BaseBullet> bulletList = new ArrayList<>();
+    public List<BaseTank> tankList = new ArrayList<>();
+    public List<BaseExplode> explodeList = new ArrayList<>();
+
+    BaseTank myTank = baseTankGroup.creatTank(200,400, Dir.DOWN, Group.GOOD, this);
 
     public TankFrame(){
         //Frame frame = new Frame();
@@ -163,6 +168,14 @@ public class TankFrame extends Frame {
                     break;
                 default:
                     break;
+            }
+            if (key == KeyEvent.VK_2){
+                baseTankGroup = new AdvanceTankGroup();
+                myTank = baseTankGroup.creatTank(myTank.x, myTank.y, Dir.DOWN, Group.GOOD, myTank.tankFrame);
+            }
+            if (key == KeyEvent.VK_1){
+                baseTankGroup = new DefaultTankGroup();
+                myTank = baseTankGroup.creatTank(myTank.x, myTank.y, Dir.DOWN, Group.GOOD, myTank.tankFrame);
             }
             setMainTankDir();
         }

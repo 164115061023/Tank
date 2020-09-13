@@ -1,13 +1,11 @@
 package com.zl.pojo;
 
-import com.zl.Audio;
+import com.zl.utils.Audio;
 import com.zl.ResourceImage;
 import com.zl.TankFrame;
-import com.zl.enums.Dir;
-import com.zl.enums.Group;
+import com.zl.pojo.abstractTankGroup.BaseExplode;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * @Description
@@ -15,17 +13,11 @@ import java.util.Random;
  * @Date 2020/8/30 21:41
  * @Version 1.0
  */
-public class DefaultExplode {
-    //位置
-    private int x , y;
-
-    private boolean living = true;
+public class DefaultExplode extends BaseExplode {
 
     //宽高
     public static int width = ResourceImage.explodeList[0].getWidth();
     public static int heigth = ResourceImage.explodeList[0].getHeight();
-
-    private TankFrame tankFrame;
 
     int step = 0;
 

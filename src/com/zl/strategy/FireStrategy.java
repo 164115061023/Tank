@@ -1,6 +1,8 @@
-package com.zl;
+package com.zl.strategy;
 
+import com.zl.TankFrame;
 import com.zl.pojo.DefaultTank;
+import com.zl.pojo.abstractTankGroup.BaseTank;
 
 /**
  * @Description
@@ -9,5 +11,5 @@ import com.zl.pojo.DefaultTank;
  * @Version 1.0
  */
 public interface FireStrategy {
-    void fire(DefaultTank t);
+    void fire(BaseTank t, TankFrame tankFrame);
 }

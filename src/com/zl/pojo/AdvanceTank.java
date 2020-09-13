@@ -1,6 +1,7 @@
 package com.zl.pojo;
 
-import com.zl.*;
+import com.zl.ResourceImage;
+import com.zl.TankFrame;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
 import com.zl.pojo.abstractTankGroup.BaseTank;
@@ -10,21 +11,14 @@ import com.zl.strategy.FourDirFire;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
-/**
- * @Description
- * @Author zl
- * @Date 2020/8/15 10:10
- * @Version 1.0
- */
-public class DefaultTank extends BaseTank {
+public class AdvanceTank extends BaseTank {
 
     //坦克宽高
-    public static int width = ResourceImage.goodTankU.getWidth();
-    public static int heigth = ResourceImage.goodTankU.getHeight();
+    public static int width = ResourceImage.goodTankU2.getWidth();
+    public static int heigth = ResourceImage.goodTankU2.getHeight();
 
-    public DefaultTank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public AdvanceTank(int x, int y, Dir dir, Group group, TankFrame tankFrame){
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -36,6 +30,7 @@ public class DefaultTank extends BaseTank {
         rect.height = heigth;
     }
 
+    @Override
     public void paint(Graphics g) {
 
         if (!living) {
@@ -63,16 +58,16 @@ public class DefaultTank extends BaseTank {
         } else {
             switch (dir) {
                 case UP:
-                    image = ResourceImage.goodTankU;
+                    image = ResourceImage.goodTankU2;
                     break;
                 case DOWN:
-                    image = ResourceImage.goodTankD;
+                    image = ResourceImage.goodTankD2;
                     break;
                 case LEFT:
-                    image = ResourceImage.goodTankL;
+                    image = ResourceImage.goodTankL2;
                     break;
                 case RIGHT:
-                    image = ResourceImage.goodTankR;
+                    image = ResourceImage.goodTankR2;
                     break;
             }
         }
@@ -82,8 +77,18 @@ public class DefaultTank extends BaseTank {
         move();
     }
 
-    public void move() {
+    @Override
+    public void fire(int code) {
+        if (code == KeyEvent.VK_CONTROL) {
+            DefaultFire.getInstance().fire(this, tankFrame);
+        }
+        if (code == KeyEvent.VK_A){
+            FourDirFire.getInstance().fire(this, tankFrame);
+        }
+    }
 
+    @Override
+    public void move() {
         if(!moving) return;
 
         switch (dir){
@@ -111,6 +116,11 @@ public class DefaultTank extends BaseTank {
         rect.y = this.y;
     }
 
+    public void randomDir(){
+        this.dir = Dir.values()[random.nextInt(4)];
+    }
+
+    @Override
     public void boundsCheck() {
         if (this.x < 2) x = 2;
         if (this.y < 30) y = 30;
@@ -118,17 +128,4 @@ public class DefaultTank extends BaseTank {
         if ((this.y > TankFrame.GAME_HEIGHT - DefaultTank.heigth)) y = TankFrame.GAME_HEIGHT - DefaultTank.heigth;
     }
 
-    private void randomDir(){
-        this.dir = Dir.values()[random.nextInt(4)];
-    }
-
-
-    public void fire(int code) {
-        if (code == KeyEvent.VK_CONTROL) {
-            DefaultFire.getInstance().fire(this, tankFrame);
-        }
-        if (code == KeyEvent.VK_A){
-            FourDirFire.getInstance().fire(this, tankFrame);
-        }
-    }
 }
