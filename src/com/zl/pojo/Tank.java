@@ -15,7 +15,7 @@ import java.util.Random;
  * @Date 2020/8/15 10:10
  * @Version 1.0
  */
-public class DefaultTank {
+public class Tank extends GameObject{
 
     //坦克位置
     private int x , y;
@@ -39,14 +39,14 @@ public class DefaultTank {
 
     Rectangle rect = new Rectangle();
 
-    public TankFrame tankFrame;
+    public GameModel gm;
 
-    public DefaultTank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = width;
@@ -97,7 +97,7 @@ public class DefaultTank {
     public void paint(Graphics g) {
 
         if (!living) {
-            tankFrame.tankList.remove(this);
+            gm.gameObjects.remove(this);
         }
 
         /*x+=20;
@@ -171,8 +171,8 @@ public class DefaultTank {
     private void boundsCheck() {
         if (this.x < 2) x = 2;
         if (this.y < 30) y = 30;
-        if ((this.x > TankFrame.GAME_WIDTH - DefaultTank.width)) x = TankFrame.GAME_WIDTH - DefaultTank.width;
-        if ((this.y > TankFrame.GAME_HEIGHT - DefaultTank.heigth)) y = TankFrame.GAME_HEIGHT - DefaultTank.heigth;
+        if ((this.x > TankFrame.GAME_WIDTH - Tank.width)) x = TankFrame.GAME_WIDTH - Tank.width;
+        if ((this.y > TankFrame.GAME_HEIGHT - Tank.heigth)) y = TankFrame.GAME_HEIGHT - Tank.heigth;
     }
 
     private void randomDir(){

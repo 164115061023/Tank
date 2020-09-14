@@ -1,6 +1,7 @@
 package com.zl.pojo;
 
 import com.zl.Audio;
+import com.zl.GameModel;
 import com.zl.ResourceImage;
 import com.zl.TankFrame;
 import com.zl.enums.Dir;
@@ -15,7 +16,7 @@ import java.util.Random;
  * @Date 2020/8/30 21:41
  * @Version 1.0
  */
-public class DefaultExplode {
+public class Explode extends GameObject{
     //位置
     private int x , y;
 
@@ -25,21 +26,21 @@ public class DefaultExplode {
     public static int width = ResourceImage.explodeList[0].getWidth();
     public static int heigth = ResourceImage.explodeList[0].getHeight();
 
-    private TankFrame tankFrame;
+    GameModel gm;
 
     int step = 0;
 
-    public DefaultExplode(int x, int y, TankFrame tankFrame) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         new Thread(()->new Audio("com/zl/audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourceImage.explodeList[step++],x,y,null);
         if (step >= ResourceImage.explodeList.length){
-            tankFrame.explodeList.remove(this);
+            gm.gameObjects.remove(this);
             step = 0;
         }
     }

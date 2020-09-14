@@ -1,18 +1,12 @@
 package com.zl;
 
 import com.zl.enums.Dir;
-import com.zl.enums.Group;
-import com.zl.pojo.DefaultBullet;
-import com.zl.pojo.DefaultExplode;
-import com.zl.pojo.DefaultTank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Description
@@ -25,11 +19,8 @@ public class TankFrame extends Frame {
     //游戏页面长度和高度
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
-    DefaultTank myTank = new DefaultTank(200,400, Dir.DOWN, Group.GOOD, this);
+    GameModel gm = new GameModel();
 
-    public List<DefaultBullet> bulletList = new ArrayList<>();
-    public List<DefaultTank> tankList = new ArrayList<>();
-    public List<DefaultExplode> explodeList = new ArrayList<>();
     //public Explode explode = new Explode(100,100,this);
 
     public TankFrame(){
@@ -68,33 +59,8 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        gm.paint(g);
 
-        g.drawString("子弹数量："+bulletList.size(),10,60);
-        g.drawString("敌人数量："+tankList.size(),10,80);
-        g.drawString("消灭敌人数量："+explodeList.size(),10,100);
-        myTank.paint(g);
-//        for (Bullet bullet : bulletList) { //这种迭代在过程中不允许删除元素
-//            bullet.paint(g);
-//        }
-        for (int i = 0; i < bulletList.size(); i++) {
-            bulletList.get(i).paint(g);
-        }
-        for (int i = 0; i < tankList.size(); i++) {
-            tankList.get(i).paint(g);
-        }
-
-        for (int i = 0; i < explodeList.size(); i++) {
-            explodeList.get(i).paint(g);
-        }
-
-        for (int i = 0; i < bulletList.size(); i++) {
-            for (int j = 0; j < tankList.size(); j++) {
-                bulletList.get(i).collideWith(tankList.get(j));
-            }
-        }
-
-
-        //explode.paint(g);
     }
 
 
@@ -128,13 +94,13 @@ public class TankFrame extends Frame {
 
          private void setMainTankDir() {
             if(!left && !right && !up && !down){
-                myTank.setMoving(false);
+                gm.myTank.setMoving(false);
             } else{
-                myTank.setMoving(true);
-                if(left) myTank.setDir(Dir.LEFT);
-                if(right) myTank.setDir(Dir.RIGHT);
-                if(up) myTank.setDir(Dir.UP);
-                if(down) myTank.setDir(Dir.DOWN);
+                gm.myTank.setMoving(true);
+                if(left) gm.myTank.setDir(Dir.LEFT);
+                if(right) gm.myTank.setDir(Dir.RIGHT);
+                if(up) gm.myTank.setDir(Dir.UP);
+                if(down) gm.myTank.setDir(Dir.DOWN);
             }
          }
 
@@ -156,10 +122,10 @@ public class TankFrame extends Frame {
                     down = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire(KeyEvent.VK_CONTROL);
+                    gm.myTank.fire(KeyEvent.VK_CONTROL);
                     break;
                 case KeyEvent.VK_A:
-                    myTank.fire(KeyEvent.VK_A);
+                    gm.myTank.fire(KeyEvent.VK_A);
                     break;
                 default:
                     break;
