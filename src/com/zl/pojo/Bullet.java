@@ -49,6 +49,8 @@ public class Bullet {
         rect.y = this.y;
         rect.width = width;
         rect.height = heigth;
+        if (group == Group.GOOD)
+        new Thread(()->new Audio("com/zl/audio/tank_fire.wav").play()).start();
     }
 
     public Dir getDir() {
