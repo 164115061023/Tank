@@ -1,5 +1,6 @@
 package com.zl.pojo;
 
+import com.zl.Audio;
 import com.zl.GameModel;
 import com.zl.ResourceImage;
 import com.zl.TankFrame;
@@ -26,7 +27,7 @@ public class Bullet extends GameObject{
     public static int width = ResourceImage.bulletD.getWidth();
     public static int heigth = ResourceImage.bulletD.getHeight();
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private final static int speed = 6;
 
@@ -49,6 +50,7 @@ public class Bullet extends GameObject{
         rect.y = this.y;
         rect.width = width;
         rect.height = heigth;
+        gm.gameObjects.add(this);
         if (group == Group.GOOD)
         new Thread(()->new Audio("com/zl/audio/tank_fire.wav").play()).start();
     }
@@ -123,7 +125,7 @@ public class Bullet extends GameObject{
         }
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }

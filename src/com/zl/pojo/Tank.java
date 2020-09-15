@@ -37,7 +37,7 @@ public class Tank extends GameObject{
     public static int width = ResourceImage.goodTankU.getWidth();
     public static int heigth = ResourceImage.goodTankU.getHeight();
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     public GameModel gm;
 
