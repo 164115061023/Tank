@@ -1,11 +1,11 @@
 package com.zl.pojo;
 
-import com.zl.ResourceImage;
-import com.zl.TankFrame;
+import com.zl.*;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -15,7 +15,7 @@ import java.util.Random;
  * @Date 2020/8/15 10:10
  * @Version 1.0
  */
-public class Tank {
+public class Tank extends GameObject{
 
     //坦克位置
     private int x , y;
@@ -39,14 +39,14 @@ public class Tank {
 
     Rectangle rect = new Rectangle();
 
-    private TankFrame tankFrame;
+    public GameModel gm;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = width;
@@ -97,7 +97,7 @@ public class Tank {
     public void paint(Graphics g) {
 
         if (!living) {
-            tankFrame.tankList.remove(this);
+            gm.gameObjects.remove(this);
         }
 
         /*x+=20;
@@ -158,7 +158,7 @@ public class Tank {
                 break;
         }
 
-        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire(KeyEvent.VK_CONTROL);
         if (this.group == Group.BAD && random.nextInt(100) > 95) this.randomDir();
 
         //边界碰撞检查
@@ -180,10 +180,13 @@ public class Tank {
     }
 
 
-    public void fire() {
-        int bx = this.x - Bullet.width / 2 + Tank.width / 2;
-        int by = this.y - Bullet.heigth / 2 + Tank.heigth / 2;
-        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.getGroup(), this.tankFrame));
+    public void fire(int code) {
+        if (code == KeyEvent.VK_CONTROL) {
+            DefaultFire.getInstance().fire(this);
+        }
+        if (code == KeyEvent.VK_A){
+            FourDirFire.getInstance().fire(this);
+        }
     }
 
     public void die() {

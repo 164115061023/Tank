@@ -1,8 +1,6 @@
 package com.zl.pojo;
 
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-import com.zl.Audio;
-import com.zl.Explode;
+import com.zl.GameModel;
 import com.zl.ResourceImage;
 import com.zl.TankFrame;
 import com.zl.enums.Dir;
@@ -17,7 +15,7 @@ import java.awt.image.BufferedImage;
  * @Date 2020/8/15 11:13
  * @Version 1.0
  */
-public class Bullet {
+public class Bullet extends GameObject{
 
     //位置
     private int x, y;
@@ -39,12 +37,14 @@ public class Bullet {
 
     TankFrame tf = null;
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    GameModel gm;
+
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = width;
@@ -65,7 +65,7 @@ public class Bullet {
     public void paint(Graphics g) {
 
         if (!living) {
-            tf.bulletList.remove(this);
+            gm.gameObjects.remove(this);
         }
 
 //        Color color = g.getColor();
@@ -119,7 +119,7 @@ public class Bullet {
         if (rect.intersects(tank.rect)) {
             tank.die();
             this.die();
-            tf.explodeList.add(new Explode(tank.getX()+Tank.width/2-Explode.width/2, tank.getY()+Tank.heigth/2-Explode.heigth/2, tf));
+            gm.gameObjects.add(new Explode(tank.getX()+ Tank.width/2- Explode.width/2, tank.getY()+ Tank.heigth/2- Explode.heigth/2, gm));
         }
     }
 
