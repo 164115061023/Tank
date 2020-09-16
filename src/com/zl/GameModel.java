@@ -1,5 +1,8 @@
 package com.zl;
 
+import com.zl.chainOfResponsibility.BulletTankCollide;
+import com.zl.chainOfResponsibility.CollideChain;
+import com.zl.chainOfResponsibility.TankTankCollide;
 import com.zl.config.PropertiesManager;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
@@ -25,6 +28,7 @@ public class GameModel {
 
     public List<GameObject> gameObjects = new ArrayList<>();
 
+    CollideChain chain = new CollideChain();
 
     public GameModel(){
         int tankCount = propertiesManager.getIntConfig("initTankCount");
@@ -53,6 +57,18 @@ public class GameModel {
 //            }
 //        }
 
+    }
+
+    public boolean collideWith(){
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int j = i+1; j < gameObjects.size(); j++) {
+                CollideChain chain = new CollideChain();
+                if (chain.collideWith(gameObjects.get(i), gameObjects.get(j), this)){
+                    break;
+                };
+            }
+        }
+        return true;
     }
 
 

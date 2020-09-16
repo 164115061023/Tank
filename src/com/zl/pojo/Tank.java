@@ -19,6 +19,8 @@ public class Tank extends GameObject{
 
     //坦克位置
     private int x , y;
+
+    public int preX=0, preY=0;
     //坦克速度
     private final static int speed = 5;
 
@@ -140,6 +142,8 @@ public class Tank extends GameObject{
     }
 
     private void move() {
+        preX = x;
+        preY = y;
 
         if(!moving) return;
 

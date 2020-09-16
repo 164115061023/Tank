@@ -34,7 +34,7 @@ public class Bullet extends GameObject{
     //子弹是否活着
     private boolean living = true;
 
-    private Group group = null;
+    public Group group = null;
 
     TankFrame tf = null;
 
@@ -114,16 +114,17 @@ public class Bullet extends GameObject{
         rect.y = this.y;
 
         if (x<0 || y<0 || x> TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
+        gm.collideWith();
     }
 
-    public void collideWith(Tank tank) {
+    /*public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
         if (rect.intersects(tank.rect)) {
             tank.die();
             this.die();
             gm.gameObjects.add(new Explode(tank.getX()+ Tank.width/2- Explode.width/2, tank.getY()+ Tank.heigth/2- Explode.heigth/2, gm));
         }
-    }
+    }*/
 
     public void die() {
         this.living = false;
