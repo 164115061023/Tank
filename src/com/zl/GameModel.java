@@ -31,6 +31,7 @@ public class GameModel {
     CollideChain chain = new CollideChain();
 
     public GameModel(){
+        //初始化敌方坦克
         int tankCount = propertiesManager.getIntConfig("initTankCount");
         for(int i = 0; i < tankCount; i++)
             gameObjects.add(new Tank(i*60, 200, Dir.DOWN, Group.BAD, this));
