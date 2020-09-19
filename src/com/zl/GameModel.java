@@ -80,7 +80,7 @@ public class GameModel {
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int j = i+1; j < gameObjects.size(); j++) {
                 CollideChain chain = new CollideChain();
-                if (chain.collideWith(gameObjects.get(i), gameObjects.get(j), this)){
+                if (chain.collideWith(gameObjects.get(i), gameObjects.get(j))){
                     break;
                 };
             }

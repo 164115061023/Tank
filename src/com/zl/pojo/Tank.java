@@ -17,9 +17,6 @@ import java.util.Random;
  */
 public class Tank extends GameObject{
 
-    //坦克位置
-    private int x , y;
-
     public int preX=0, preY=0;
     //坦克速度
     private final static int speed = 5;
@@ -137,6 +134,16 @@ public class Tank extends GameObject{
 
         g.drawImage(image, x, y, null);
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return heigth;
     }
 
     private void move() {

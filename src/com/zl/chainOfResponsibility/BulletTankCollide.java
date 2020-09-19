@@ -8,7 +8,7 @@ import com.zl.pojo.Tank;
 
 public class BulletTankCollide implements Collide{
     @Override
-    public boolean collideWith(GameObject o1, GameObject o2, GameModel gm) {
+    public boolean collideWith(GameObject o1, GameObject o2) {
         if (o1 instanceof Bullet && o2 instanceof Tank){
             Bullet bullet = (Bullet)o1;
             Tank tank = (Tank)o2;
@@ -16,11 +16,11 @@ public class BulletTankCollide implements Collide{
             if (bullet.rect.intersects(tank.rect)) {
                 bullet.die();
                 tank.die();
-                gm.gameObjects.add(new Explode(tank.getX()+ Tank.width/2- Explode.width/2, tank.getY()+ Tank.heigth/2- Explode.heigth/2, gm));
+                GameModel.getInstance().add(new Explode(tank.getX()+ Tank.width/2- Explode.width/2, tank.getY()+ Tank.heigth/2- Explode.heigth/2));
                 return true;
             }
         } else if (o2 instanceof Bullet && o1 instanceof Tank){
-            return collideWith(o2, o1, gm);
+            return collideWith(o2, o1);
         }
         return false;
     }

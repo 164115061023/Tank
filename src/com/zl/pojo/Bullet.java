@@ -18,8 +18,6 @@ import java.awt.image.BufferedImage;
  */
 public class Bullet extends GameObject{
 
-    //位置
-    private int x, y;
     //方向
     private Dir dir;
 
@@ -48,7 +46,7 @@ public class Bullet extends GameObject{
         rect.y = this.y;
         rect.width = width;
         rect.height = heigth;
-        GameModel.getInstance().add(this);
+        //GameModel.getInstance().add(this);
         if (group == Group.GOOD)
         new Thread(()->new Audio("com/zl/audio/tank_fire.wav").play()).start();
     }
@@ -90,6 +88,16 @@ public class Bullet extends GameObject{
         }
         g.drawImage(image,x,y,null);
 
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return heigth;
     }
 
     private void move() {

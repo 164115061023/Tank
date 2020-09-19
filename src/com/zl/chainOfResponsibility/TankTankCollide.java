@@ -6,7 +6,7 @@ import com.zl.pojo.Tank;
 
 public class TankTankCollide implements Collide{
     @Override
-    public boolean collideWith(GameObject o1, GameObject o2, GameModel gm) {
+    public boolean collideWith(GameObject o1, GameObject o2) {
         if (o1 instanceof Tank && o2 instanceof Tank) {
             Tank tank1 = (Tank)o1;
             Tank tank2 = (Tank)o2;

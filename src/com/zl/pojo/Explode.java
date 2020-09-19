@@ -17,8 +17,6 @@ import java.util.Random;
  * @Version 1.0
  */
 public class Explode extends GameObject{
-    //位置
-    private int x , y;
 
     private boolean living = true;
 
@@ -26,22 +24,30 @@ public class Explode extends GameObject{
     public static int width = ResourceImage.explodeList[0].getWidth();
     public static int heigth = ResourceImage.explodeList[0].getHeight();
 
-    GameModel gm;
 
     int step = 0;
 
-    public Explode(int x, int y, GameModel gm) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
         new Thread(()->new Audio("com/zl/audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourceImage.explodeList[step++],x,y,null);
         if (step >= ResourceImage.explodeList.length){
-            gm.gameObjects.remove(this);
+           GameModel.getInstance().remove(this);
             step = 0;
         }
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return heigth;
     }
 }

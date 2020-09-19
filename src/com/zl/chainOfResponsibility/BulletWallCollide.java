@@ -5,7 +5,7 @@ import com.zl.pojo.*;
 
 public class BulletWallCollide implements Collide{
     @Override
-    public boolean collideWith(GameObject o1, GameObject o2, GameModel gm) {
+    public boolean collideWith(GameObject o1, GameObject o2) {
         if (o1 instanceof Bullet && o2 instanceof Wall){
             Bullet bullet = (Bullet)o1;
             Wall wall = (Wall) o2;
@@ -13,7 +13,7 @@ public class BulletWallCollide implements Collide{
                 bullet.die();
             }
         } else if (o2 instanceof Bullet && o1 instanceof Wall){
-            return collideWith(o2, o1, gm);
+            return collideWith(o2, o1);
         }
         return false;
     }

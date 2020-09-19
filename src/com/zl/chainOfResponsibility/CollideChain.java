@@ -16,9 +16,9 @@ public class CollideChain {
         collides.add(new TankWallCollide());
     }
 
-    public boolean collideWith(GameObject o1, GameObject o2, GameModel gm) {
+    public boolean collideWith(GameObject o1, GameObject o2) {
         for (int i = 0; i < collides.size(); i++) {
-            if (collides.get(i).collideWith(o1, o2, gm)){
+            if (collides.get(i).collideWith(o1, o2)){
                 break;
             }
         }
