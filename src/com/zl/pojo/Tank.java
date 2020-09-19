@@ -41,14 +41,12 @@ public class Tank extends GameObject{
 
     public Rectangle rect = new Rectangle();
 
-    public GameModel gm;
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = width;
@@ -99,7 +97,7 @@ public class Tank extends GameObject{
     public void paint(Graphics g) {
 
         if (!living) {
-            gm.gameObjects.remove(this);
+            GameModel.getInstance().gameObjects.remove(this);
         }
 
         /*x+=20;
@@ -194,6 +192,6 @@ public class Tank extends GameObject{
     }
 
     public void die() {
-        living = false;
+        this.living = false;
     }
 }

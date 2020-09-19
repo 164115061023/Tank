@@ -6,10 +6,7 @@ import com.zl.chainOfResponsibility.TankTankCollide;
 import com.zl.config.PropertiesManager;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
-import com.zl.pojo.Bullet;
-import com.zl.pojo.Explode;
-import com.zl.pojo.GameObject;
-import com.zl.pojo.Tank;
+import com.zl.pojo.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,19 +19,38 @@ import java.util.List;
  * @Version 1.0
  */
 public class GameModel {
+
+    private static final GameModel gameModel = new GameModel();
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManagerInstance();
 
-    Tank myTank = new Tank(200,400, Dir.DOWN, Group.GOOD, this);
+    Tank myTank = new Tank(200,400, Dir.DOWN, Group.GOOD);
 
     public List<GameObject> gameObjects = new ArrayList<>();
 
     CollideChain chain = new CollideChain();
 
-    public GameModel(){
+    private GameModel(){
         //初始化敌方坦克
         int tankCount = propertiesManager.getIntConfig("initTankCount");
         for(int i = 0; i < tankCount; i++)
-            gameObjects.add(new Tank(i*60, 200, Dir.DOWN, Group.BAD, this));
+            add(new Tank(i*60, 200, Dir.DOWN, Group.BAD));
+
+        add(new Wall(180, 180, 15, 150));
+        add(new Wall(380, 180, 15, 150));
+        add(new Wall(200, 160, 180, 15));
+        //初始化墙
+
+    }
+
+    public static GameModel getInstance(){
+        return gameModel;
+    }
+
+    public void add(GameObject object){
+        this.gameObjects.add(object);
+    }
+    public void remove(GameObject object){
+        this.gameObjects.remove(object);
     }
 
 

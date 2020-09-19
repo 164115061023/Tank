@@ -17,9 +17,9 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     //游戏页面长度和高度
-    public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
 
-    GameModel gm = new GameModel();
+    GameModel gm = GameModel.getInstance();
 
     //public Explode explode = new Explode(100,100,this);
 

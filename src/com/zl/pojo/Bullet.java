@@ -38,19 +38,17 @@ public class Bullet extends GameObject{
 
     TankFrame tf = null;
 
-    GameModel gm;
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = width;
         rect.height = heigth;
-        gm.gameObjects.add(this);
+        GameModel.getInstance().add(this);
         if (group == Group.GOOD)
         new Thread(()->new Audio("com/zl/audio/tank_fire.wav").play()).start();
     }
@@ -67,7 +65,7 @@ public class Bullet extends GameObject{
     public void paint(Graphics g) {
 
         if (!living) {
-            gm.gameObjects.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
 //        Color color = g.getColor();
@@ -114,7 +112,7 @@ public class Bullet extends GameObject{
         rect.y = this.y;
 
         if (x<0 || y<0 || x> TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT) living = false;
-        gm.collideWith();
+        GameModel.getInstance().collideWith();
     }
 
     /*public void collideWith(Tank tank) {

@@ -12,6 +12,8 @@ public class CollideChain {
     public CollideChain(){
         collides.add(new BulletTankCollide());
         collides.add(new TankTankCollide());
+        collides.add(new BulletWallCollide());
+        collides.add(new TankWallCollide());
     }
 
     public boolean collideWith(GameObject o1, GameObject o2, GameModel gm) {
