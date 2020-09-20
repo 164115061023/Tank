@@ -1,5 +1,6 @@
 package com.zl.decorator;
 
+import com.zl.enums.Group;
 import com.zl.pojo.GameObject;
 
 import java.awt.*;
@@ -26,5 +27,15 @@ public class RectDecorator extends GODecorator {
     @Override
     public int getHeight() {
         return super.go.getHeight();
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return super.go.getRect();
+    }
+
+    @Override
+    public Group getGroup() {
+        return super.go.getGroup();
     }
 }

@@ -3,6 +3,8 @@ package com.zl.pojo;
 import com.zl.*;
 import com.zl.enums.Dir;
 import com.zl.enums.Group;
+import com.zl.strategy.DefaultFire;
+import com.zl.strategy.FourDirFire;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -144,6 +146,11 @@ public class Tank extends GameObject{
     @Override
     public int getHeight() {
         return heigth;
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return rect;
     }
 
     private void move() {

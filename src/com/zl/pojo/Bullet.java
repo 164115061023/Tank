@@ -100,6 +100,16 @@ public class Bullet extends GameObject{
         return heigth;
     }
 
+    @Override
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    @Override
+    public Group getGroup() {
+        return group;
+    }
+
     private void move() {
         switch (dir){
             case UP:

@@ -1,5 +1,7 @@
 package com.zl.pojo;
 
+import com.zl.enums.Group;
+
 import java.awt.*;
 
 /**
@@ -14,5 +16,7 @@ public abstract class GameObject {
     public abstract void paint(Graphics g);
     public abstract int getWidth();
     public abstract int getHeight();
+    public abstract Rectangle getRect();
+    public abstract Group getGroup();
 
 }

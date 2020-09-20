@@ -1,6 +1,7 @@
 package com.zl.pojo;
 
 import com.zl.GameModel;
+import com.zl.enums.Group;
 
 import java.awt.*;
 
@@ -36,6 +37,16 @@ public class Wall extends GameObject{
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return null;
+    }
+
+    @Override
+    public Group getGroup() {
+        return null;
     }
 
 }

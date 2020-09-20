@@ -1,5 +1,7 @@
-package com.zl;
+package com.zl.strategy;
 
+import com.zl.Audio;
+import com.zl.GameModel;
 import com.zl.decorator.RectDecorator;
 import com.zl.decorator.TailDecorator;
 import com.zl.enums.Group;
@@ -23,9 +25,13 @@ public class DefaultFire implements FireStrategy{
         int bx = t.getX() - Bullet.width / 2 + Tank.width / 2;
         int by = t.getY() - Bullet.heigth / 2 + Tank.heigth / 2;
         GameModel.getInstance().add(
-                new RectDecorator(
-                        new TailDecorator(
-                        new Bullet(bx, by, t.getDir(), t.getGroup()))));
+            new RectDecorator(
+                new TailDecorator(
+                    new Bullet(bx, by, t.getDir(), t.getGroup())
+                )
+            )
+        );
+//        GameModel.getInstance().add(new Bullet(bx, by, t.getDir(), t.getGroup()));
         if (t.getGroup() == Group.GOOD)
             new Thread(()->{
                 new Audio("com/zl/audio/tank_fire.wav").play();

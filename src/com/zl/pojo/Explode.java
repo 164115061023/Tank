@@ -50,4 +50,14 @@ public class Explode extends GameObject{
     public int getHeight() {
         return heigth;
     }
+
+    @Override
+    public Rectangle getRect() {
+        return null;
+    }
+
+    @Override
+    public Group getGroup() {
+        return null;
+    }
 }

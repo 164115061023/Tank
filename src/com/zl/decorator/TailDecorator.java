@@ -1,5 +1,6 @@
 package com.zl.decorator;
 
+import com.zl.enums.Group;
 import com.zl.pojo.GameObject;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ public class TailDecorator extends GODecorator {
         super.paint(g);
         Color color  = g.getColor();
         g.setColor(Color.BLACK);
-        g.drawLine(super.go.x, super.go.y, super.go.x, getHeight()+super.go.y);
+        g.drawLine(super.go.x, super.go.y, super.go.x-10, super.go.y-20);
         g.setColor(color);
     }
 
@@ -28,5 +29,15 @@ public class TailDecorator extends GODecorator {
     @Override
     public int getHeight() {
         return super.go.getHeight();
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return super.go.getRect();
+    }
+
+    @Override
+    public Group getGroup() {
+        return super.go.getGroup();
     }
 }
